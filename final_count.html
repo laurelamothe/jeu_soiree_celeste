@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image de fond</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="content-box">
+        <h1>Jackpot Total</h1>
+        <p>Le montant total du jackpot est : <span id="jackpotAmount">0</span> points.</p>
+        <a href="premiere_page.html" class="btn">Retour à la page principale</a>
+    </div>
+    <script>
+        const jackpotAmount = localStorage.getItem('jackpot');
+        document.getElementById('jackpotAmount').textContent = jackpotAmount;
+    </script>
+</body>
+</html>

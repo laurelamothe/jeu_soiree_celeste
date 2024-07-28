@@ -1,0 +1,80 @@
+body {
+    margin: 0;
+    padding: 0;
+    /* Image de fond pour toute la page */
+    background-image: url('sky.jpg');
+    background-size: cover; /* Pour couvrir tout l'écran */
+    background-position: center; /* Centrer l'image */
+    background-repeat: no-repeat; /* Ne pas répéter l'image */
+}
+
+.background-container {
+    /* Optionnel : si vous voulez appliquer une image de fond à un div spécifique */
+    background-image: url('sky.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh; /* Hauteur de 100% de la vue */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.7); /* Pour rendre le texte lisible */
+}
+
+
+.content-box {
+    background-color: #001f3f; /* Couleur bleu marine */
+    padding: 20px;
+    border-radius: 8px; /* Bords arrondis */
+    width: 90%; /* Largeur ajustée pour les mobiles */
+    max-width: 500px; /* Largeur maximale pour les écrans plus grands */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Ombre portée */
+    color: white; /* Couleur du texte */
+    text-align: center; /* Centrer le texte */
+}
+
+
+h1, p {
+    margin: 0 0 10px; /* Espacement entre les éléments */
+}
+
+
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff; /* Couleur bleue pour le bouton */
+    color: white; /* Couleur du texte */
+    text-decoration: none; /* Supprime le soulignement */
+    border-radius: 5px; /* Arrondir les coins */
+    font-weight: bold;
+    transition: background-color 0.3s ease; /* Animation pour le survol */
+}
+
+.btn:hover {
+    background-color: #0056b3; /* Couleur au survol */
+}
+
+#countdown {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.1); /* Fond légèrement transparent */
+    border-radius: 5px;
+    text-align: center;
+}
+
+#time {
+    font-size: 1.5em; /* Taille du texte du compte à rebours */
+    font-weight: bold;
+}
+
+#days, #hours, #minutes, #seconds {
+    display: inline-block;
+    min-width: 50px; /* Largeur minimale pour une bonne présentation */
+}
+
+#btncache {
+    display: none; /* Cache complètement le bouton */
+    background-color: #001f3f; /* Couleur bleue pour le bouton */
+}
