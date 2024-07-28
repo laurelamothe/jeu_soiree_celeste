@@ -1,3 +1,57 @@
+// Fonction pour mettre à jour l'affichage de la cagnotte
+function updateJackpotDisplay(jackpot) {
+    document.getElementById('jackpotDisplay').innerText = jackpot;
+}
+
+// Obtenir la cagnotte actuelle depuis le serveur
+function getJackpot() {
+    fetch('http://localhost:3000/jackpot')
+        .then(response => response.json())
+        .then(data => {
+            updateJackpotDisplay(data.jackpot);
+        })
+        .catch(error => console.error('Erreur:', error));
+}
+
+// Fonction pour ajouter des points au jackpot
+function addPoints() {
+    fetch('http://localhost:3000/jackpot/add', {
+        method: 'POST'
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert("10 points ajoutés au jackpot !");
+        updateJackpotDisplay(data.jackpot);
+    })
+    .catch(error => console.error('Erreur:', error));
+}
+
+// Fonctionnalité de réinitialisation avec un code secret
+document.getElementById('resetButton').addEventListener('click', function() {
+    const secretCode = prompt("Veuillez entrer le code secret pour réinitialiser le jackpot :");
+    fetch('http://localhost:3000/jackpot/reset', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ secretCode })
+    })
+    .then(response => {
+        if (response.ok) {
+            alert("Le jackpot a été réinitialisé !");
+            getJackpot();
+        } else {
+            alert("Code incorrect. Accès refusé.");
+        }
+    })
+    .catch(error => console.error('Erreur:', error));
+});
+
+// Initialiser l'affichage de la cagnotte au chargement
+document.addEventListener("DOMContentLoaded", function () {
+    getJackpot();
+});
+
 // Définir la date et l'heure de fin pour le compte à rebours
 const countdownDate = new Date("July 28, 2024 09:48:59").getTime();
 
@@ -27,32 +81,3 @@ const x = setInterval(function() {
         document.getElementById("countdown").innerHTML = "Le compte à rebours est terminé";
     }
 }, 1000);
-
-// Initialiser le jackpot dans le stockage local s'il n'existe pas
-if (!localStorage.getItem('jackpot')) {
-    localStorage.setItem('jackpot', '0');
-}
-
-// Fonction pour ajouter des points au jackpot
-function addPoints() {
-    let currentJackpot = parseInt(localStorage.getItem('jackpot'), 10);
-    currentJackpot += 10; // Ajouter 10 points
-    localStorage.setItem('jackpot', currentJackpot.toString());
-    alert("10 points ajoutés au jackpot !");
-}
-
-// Ajouter un écouteur d'événement au bouton pour ajouter des points
-document.getElementById('addPointsButton').addEventListener('click', addPoints);
-
-// Fonctionnalité de réinitialisation avec un code secret
-document.getElementById('resetButton').addEventListener('click', function() {
-    const secretCode = prompt("Veuillez entrer le code secret pour réinitialiser le jackpot :");
-    if (secretCode === "1234") { // Remplacez "your-secret-code" par votre code secret
-        localStorage.setItem('jackpot', '0');
-        alert("Le jackpot a été réinitialisé !");
-        // Rechargez la page pour mettre à jour l'affichage
-        location.reload();
-    } else {
-        alert("Code incorrect. Accès refusé.");
-    }
-});
